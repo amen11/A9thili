@@ -12,13 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.a9thili.R;
 import com.example.a9thili.adapters.CategoryAdapter;
+import com.example.a9thili.adapters.NewProductAdapter;
+import com.example.a9thili.adapters.PopularProductsAdapter;
 import com.example.a9thili.models.CategoryModel;
+import com.example.a9thili.models.NewProductsModel;
+import com.example.a9thili.models.PopularProductsModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,10 +36,23 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+    RecyclerView catRecyclerview,newProductRecyclerview,popularRecyclerview;
+
     //category recycler view
-    RecyclerView catRecyclerview;
     CategoryAdapter categoryAdapter;
     List<CategoryModel> categoryModelList;
+
+    //new product recycler view
+    NewProductAdapter newProductAdapter;
+    List<NewProductsModel>newProductsModelList;
+
+    //all product recyclerview
+
+    PopularProductsAdapter popularProductsAdapter;
+    List<PopularProductsModel>popularProductsModelList;
+
+
+
 
     //firestore
     FirebaseFirestore db ;
@@ -51,6 +69,11 @@ public class HomeFragment extends Fragment {
         //creation de view
         View root=inflater.inflate(R.layout.fragment_home, container, false);
         catRecyclerview=root.findViewById(R.id.rec_category);
+        newProductRecyclerview=root.findViewById(R.id.new_product_rec);
+        popularRecyclerview=root.findViewById(R.id.popular_rec);
+
+
+
         db= FirebaseFirestore.getInstance();
 
         //image slider
@@ -80,9 +103,68 @@ public class HomeFragment extends Fragment {
                                 categoryAdapter.notifyDataSetChanged();
                             }
                         } else {
+                            Toast.makeText(getActivity(),""+task.getException(),Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 });
+
+        //new products
+
+        newProductRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        newProductsModelList=new ArrayList<>();
+        newProductAdapter=new NewProductAdapter(getContext(),newProductsModelList);
+        newProductRecyclerview.setAdapter(newProductAdapter);
+
+
+        //Get data
+        db.collection("NewProducts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                NewProductsModel newProductsModel=document.toObject(NewProductsModel.class);
+                                newProductsModelList.add(newProductsModel);
+                                newProductAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(),""+task.getException(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+        //popular products
+
+        popularRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
+        popularProductsModelList=new ArrayList<>();
+        popularProductsAdapter=new PopularProductsAdapter(getContext(),popularProductsModelList);
+        popularRecyclerview.setAdapter(popularProductsAdapter);
+
+        //get data
+
+        db.collection("AllProducts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                PopularProductsModel popularProductsModel=document.toObject(PopularProductsModel.class);
+                                popularProductsModelList.add(popularProductsModel);
+                                popularProductsAdapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(),""+task.getException(),Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+
+
+
 
 
 

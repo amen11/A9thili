@@ -38,11 +38,11 @@ public class RegisterActivity extends AppCompatActivity {
         if (firsttime){
             SharedPreferences.Editor editor=sharedPreferences.edit();
             editor.putBoolean("firsttime",true);
-            editor.commit();
+            editor.apply();
 
             Intent intent=new Intent(RegisterActivity.this,OnBoardingActivity.class);
             startActivity(intent);
-            finish();
+           // finish();
         }
 
 
