@@ -1,6 +1,7 @@
 package com.example.a9thili.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.a9thili.R;
+import com.example.a9thili.activities.DetailledActivity;
 import com.example.a9thili.models.PopularProductsModel;
 
 import java.util.List;
@@ -38,6 +40,16 @@ public class PopularProductsAdapter extends RecyclerView.Adapter<PopularProducts
         Glide.with(context).load(popularProductsModelList.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(popularProductsModelList.get(position).getName());
         holder.price.setText(String.valueOf(popularProductsModelList.get(position).getPrice()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(context, DetailledActivity.class);
+                intent.putExtra("detailed",popularProductsModelList.get(position));
+                context.startActivity(intent);
+            }
+        });
+
 
     }
 

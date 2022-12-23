@@ -1,5 +1,6 @@
 package com.example.a9thili.fragments;
 
+import android.content.Intent;
 import android.icu.number.Scale;
 import android.os.Bundle;
 
@@ -12,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.a9thili.R;
+import com.example.a9thili.activities.ShowAllActivity;
 import com.example.a9thili.adapters.CategoryAdapter;
 import com.example.a9thili.adapters.NewProductAdapter;
 import com.example.a9thili.adapters.PopularProductsAdapter;
@@ -30,11 +33,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class HomeFragment extends Fragment {
+
+    TextView catShowAll,popularShowAll,newProductsShowAll;
 
     RecyclerView catRecyclerview,newProductRecyclerview,popularRecyclerview;
 
@@ -68,13 +75,41 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //creation de view
         View root=inflater.inflate(R.layout.fragment_home, container, false);
+
+        db= FirebaseFirestore.getInstance();
+
         catRecyclerview=root.findViewById(R.id.rec_category);
         newProductRecyclerview=root.findViewById(R.id.new_product_rec);
         popularRecyclerview=root.findViewById(R.id.popular_rec);
+        catShowAll=root.findViewById(R.id.category_see_all);
+        popularShowAll=root.findViewById(R.id.popular_see_all);
+        newProductsShowAll=root.findViewById(R.id.newProducts_see_all);
+
+        catShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        popularShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        newProductsShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), ShowAllActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-
-        db= FirebaseFirestore.getInstance();
 
         //image slider
         ImageSlider imageSlider=root.findViewById(R.id.image_slider);
