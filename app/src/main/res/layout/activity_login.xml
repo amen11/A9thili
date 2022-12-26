@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bggg"
+    android:background="@drawable/backk"
     tools:context=".activities.LoginActivity">
 
     <TextView
@@ -12,20 +12,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:textColor="@color/pink"
+        android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.169" />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="100px"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="116dp"
         android:background="@drawable/edit_text_bg"
         android:drawableLeft="@drawable/ic_baseline_account_circle"
         android:drawablePadding="10dp"
@@ -61,6 +61,7 @@
         android:onClick="signin"
         android:padding="15dp"
         android:text="Sign Up"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Don't have an account ? "
+        android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/pass"
@@ -88,7 +90,7 @@
         android:layout_height="wrap_content"
         android:onClick="signup"
         android:text="Sign In"
-        android:textColor="@color/blue"
+        android:textColor="@color/pink"
         android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/txtv"

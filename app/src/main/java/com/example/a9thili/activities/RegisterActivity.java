@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         name=findViewById(R.id.name);
         email=findViewById(R.id.email);
         pass=findViewById(R.id.pass);
-        sharedPreferences=getSharedPreferences("OnBoardingScreen",MODE_PRIVATE);
+        /*sharedPreferences=getSharedPreferences("OnBoardingScreen",MODE_PRIVATE);
 
         boolean firsttime=sharedPreferences.getBoolean("firsttime ",true);
         if (firsttime){
@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent=new Intent(RegisterActivity.this,OnBoardingActivity.class);
             startActivity(intent);
            // finish();
-        }
+        }*/
 
 
     }
